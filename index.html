@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Lockers - Gửi Hàng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center min-h-screen items-center p-2">
+
+    <!-- KHUNG MÀN HÌNH MOBILE -->
+    <div class="w-full max-w-sm bg-white min-h-[600px] border-4 border-slate-700 rounded-[30px] shadow-2xl flex flex-col justify-between p-5 relative overflow-hidden">
+        
+        <div class="space-y-4">
+            <!-- HEADER LOGO & TIÊU ĐỀ -->
+            <div class="flex items-center space-x-2 pt-2 border-b pb-3">
+                <span class="text-2xl">📦</span>
+                <h1 class="text-blue-600 font-bold text-lg">Gửi hàng</h1>
+            </div>
+
+            <!-- Ô 1: SỐ ĐIỆN THOẠI -->
+            <div class="space-y-1">
+                <label class="text-xs font-semibold text-gray-600 block">Số điện thoại</label>
+                <input type="tel" id="phone" placeholder="0907XXXXXX" 
+                    class="w-full border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-center font-bold focus:border-blue-500 focus:outline-none" />
+                <p class="text-[10px] text-red-500 italic text-center">
+                    người nhận yêu cầu kiểm tra kiện hàng (không rách/ướt)
+                </p>
+            </div>
+
+            <!-- Ô 2: HỌ VÀ TÊN NGƯỜI NHẬN -->
+            <div class="space-y-1">
+                <label class="text-xs font-semibold text-gray-600 block">Họ và tên người nhận</label>
+                <input type="text" id="fullname" placeholder="NGUYEN VAN A" 
+                    class="w-full border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-center font-bold uppercase focus:border-blue-500 focus:outline-none" />
+                <p class="text-[10px] text-gray-400 italic text-center">tối đa 18 ký tự</p>
+            </div>
+
+            <!-- Ô 3: SỐ LƯỢNG GỬI -->
+            <div class="flex items-center space-x-2 pt-2">
+                <span class="text-xs font-semibold text-gray-700 whitespace-nowrap">Số lượng gửi</span>
+                <input type="number" id="quantity" value="2" min="1" max="2" 
+                    class="w-12 border-2 border-gray-400 rounded-md py-1 text-center font-bold text-sm" />
+                <span class="text-[10px] text-gray-500">Tối đa 2 kiện hàng/ lần</span>
+            </div>
+        </div>
+
+        <!-- NÚT GỬI HÀNG -->
+        <div class="pb-4">
+            <button onclick="submitOrder()" 
+                class="w-full bg-amber-200 hover:bg-amber-300 border-2 border-amber-400 text-amber-900 font-bold py-2.5 rounded-lg text-sm shadow transition active:scale-95">
+                Gửi hàng
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        function submitOrder() {
+            const phone = document.getElementById('phone').value;
+            const name = document.getElementById('fullname').value;
+            const qty = document.getElementById('quantity').value;
+
+            if(!phone || !name) {
+                alert('Vui lòng nhập đầy đủ Số điện thoại và Tên người nhận!');
+                return;
+            }
+
+            alert(`[ĐÃ GỬI LỆNH TỚI TỦ]\nNgười nhận: \({name}\nSDT:\){phone}\nSố lượng: ${qty}`);
+            // Nơi dán code đẩy thông tin lên Firebase Realtime Database
+        }
+    </script>
+
+</body>
+</html>
